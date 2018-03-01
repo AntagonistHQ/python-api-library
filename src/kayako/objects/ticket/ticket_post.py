@@ -21,7 +21,6 @@ class TicketPost(KayakoObject):
     Kayako TicketPost API Object.
     
     ticketid   The unique numeric identifier of the ticket.
-    subject    The ticket post subject
     contents   The ticket post contents
     userid     The User ID, if the ticket post is to be created as a user.
     staffid    The Staff ID, if the ticket post is to be created as a staff
@@ -41,7 +40,6 @@ class TicketPost(KayakoObject):
     __parameters__ = [
         'id',
         'ticketid',
-        'subject',
         'contents',
         'userid',
         'staffid',
@@ -59,8 +57,8 @@ class TicketPost(KayakoObject):
         'isprivate',
     ]
 
-    __required_add_parameters__ = ['ticketid', 'subject', 'contents']
-    __add_parameters__ = ['ticketid', 'subject', 'contents', 'userid', 'staffid', 'isprivate']
+    __required_add_parameters__ = ['ticketid', 'contents']
+    __add_parameters__ = ['ticketid', 'contents', 'userid', 'staffid', 'isprivate']
 
     controller = '/Tickets/TicketPost'
 
@@ -70,7 +68,6 @@ class TicketPost(KayakoObject):
         params = dict(
             id=cls._get_int(ticket_post_tree.find('id')),
             ticketid=ticket_id,
-            #subject=cls._get_string(ticket_post_tree.find('subject')), # Not updated
             contents=cls._get_string(ticket_post_tree.find('contents')),
             userid=cls._get_int(ticket_post_tree.find('userid')),
             staffid=cls._get_int(ticket_post_tree.find('staffid')),
@@ -148,7 +145,6 @@ class TicketPost(KayakoObject):
         
         Requires:
             ticketid  The unique numeric identifier of the ticket.
-            subject   The ticket post subject
             contents  The ticket post contents
         Requires one of:
             userid    The User ID, if the ticket post is to be created as a user.
