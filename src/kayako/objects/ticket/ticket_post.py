@@ -166,6 +166,9 @@ class TicketPost(KayakoObject):
         if ('userid' not in parameters and 'staffid' not in parameters) or ('userid' in parameters and 'staffid' in parameters):
             raise KayakoRequestError('To add a TicketPost, just one of the following parameters must be set: userid, staffid. (id: %s)' % self.id)
 
+        if 'staffid' in parameters and 'isprivate' not in parameters:
+            raise KayakoRequestError('To add a TicketPost as Staff, the following parameter must be set: isprivate. (id: %s)' % self.id)
+
         response = self.api._request(self.controller, 'POST', **parameters)
         tree = etree.parse(response)
         node = tree.find('post')
